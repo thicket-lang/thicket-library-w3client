@@ -1,0 +1,23 @@
+{
+    "name": "W3Client",
+    "version": "1.0",
+    "description":"W3 Client package",
+    "license": "LGPL2",
+    "developers": [
+        {
+            "name": "D. Plaindoux",
+            "mail": "d.plaindoux@free.fr"
+        }
+    ],
+    "modules": [
+        "Boot.Client",
+        "Client.Document",
+        "Client.Document.Renderer",
+        "Client.Event",
+        "Client.Event.Mouse",
+        "Client.Event.Key"
+    ],
+    "requires":[
+        { "Core": "1.0" }
+    ]
+}

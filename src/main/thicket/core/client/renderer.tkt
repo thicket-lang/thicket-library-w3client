@@ -1,0 +1,49 @@
+/*
+ * Thicket
+ * https://github.com/d-plaindoux/thicket
+ *
+ * Copyright (c) 2015 Didier Plaindoux
+ * Licensed under the LGPL2 license.
+ */
+
+module Client.Document.Renderer
+
+from Lang.Do import do
+
+from Data.String import string
+from Data.Option import option
+
+from Client.Document import dom,document
+
+model Renderer {
+    (<?) : option[dom] -> Renderer
+    (<~) : dom -> Renderer
+}
+
+def domRenderer : dom -> Renderer = dom -> {
+    Renderer 
+        { newDom -> newDom fold documentRenderer $ documentRenderer <~ }
+        { newDom -> 
+            do {
+                for idDom  <- { newDom findAttribute "id" }
+                    oldDom <- { dom find idDom }
+                yield 
+                    oldDom replace newDom
+            }
+            return documentRenderer 
+        }
+}
+
+def documentRenderer : Renderer = {
+    Renderer 
+        { newDom -> newDom fold documentRenderer $ documentRenderer <~ }
+        { newDom -> 
+            do {
+                for idDom  <- { newDom findAttribute "id" }
+                    oldDom <- { document idDom find }
+                yield 
+                    oldDom replace newDom
+            }
+            return documentRenderer 
+        }
+}
