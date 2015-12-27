@@ -17,9 +17,11 @@ from Data.String import string
 from Data.Number import number,number2string
 from Data.Option import option,some,none
 from Data.List import list,List
+from Data.Boolean import bool
 
 class dom this:native {
     addEmptyAttribute : string -> dom
+    addOptionalAttribute : string -> option[string] -> dom
     addAttribute : string -> string -> dom
     findAttribute : string -> option[string]
     removeAttribute : string -> dom
@@ -28,20 +30,23 @@ class dom this:native {
     addChilds : list[dom] -> dom
     removeChilds : dom
     
+    onCondition : bool -> (dom -> dom) -> dom
+    
     onMouseEvent : [a] MouseEventType -> (dom -> a) -> dom
-    onKeyEvent   : [a] KeyEventType -> (dom -> number -> a) -> dom
+    onKeyEvent : [a] KeyEventType -> (dom -> number -> a) -> dom
 
     find : string -> option[dom]
 
     clone : dom
-    replace : dom -> dom
     remove : dom
+    replaceWith : dom -> dom
     
     value : option[string]
     
     map : [a] (dom -> a) -> a
 } {
     def addEmptyAttribute n = self addAttribute n ""
+    def addOptionalAttribute name value = value fold self $ self addAttribute name
     def addAttribute = internal "dom.setAttribute" self
     def findAttribute n = internal "dom.getAttribute" self n (e -> some $ string e) none
     def removeAttribute = internal "dom.resetAttribute" self
@@ -50,13 +55,15 @@ class dom this:native {
     def addChilds l = l foldL dom::addChild self
     def removeChilds = internal "dom.removeChilds" self
 
+    def onCondition condition action = condition fold (action self) self
+
     def onMouseEvent e f = internal "dom.onMouseEvent" self (mouseEventType e toString) (n -> f $ dom n)
     def onKeyEvent e f = internal "dom.onKeyEvent" self (keyEventType e toString) (n c -> f (dom n) (number c))
 
     def find s = internal "dom.elementById" self s (e -> some $ dom e) none
     
     def clone = dom $ internal "dom.clone" self
-    def replace = internal "dom.replace" self
+    def replaceWith = internal "dom.replace" self
     def remove = internal "dom.remove" self  
     
     def value = internal "dom.getValue" self (s -> some $ string s) none

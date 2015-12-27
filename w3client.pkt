@@ -1,8 +1,8 @@
 {
-    "name": "W3Client",
+    "name": "Client",
     "version": "1.0",
+    "location": "https://github.com/thicket-lang/thicket-library-w3client",
     "description":"W3 Client package",
-    "license": "LGPL2",
     "developers": [
         {
             "name": "D. Plaindoux",
@@ -17,6 +17,11 @@
         "Client.Event.Mouse",
         "Client.Event.Key"
     ],
+    "native": { 
+        "javascript": [
+            "dom.js"
+        ]
+    },
     "requires":[
         { "Core": "1.0" }
     ]
