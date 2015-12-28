@@ -5,7 +5,7 @@ A W3 client library dedicated to the Thicket language.
 ## Modules compilation
 
 ```sh
-> thicket compile -i https://github.com/thicket-lang/thicket-library-core/bin -p Core -o obj -v `find src/main/thicket -name \*.tkt`
+> thicket compile -i <..>/thicket-library-core/bin -p Core -o obj -v `find src/main/thicket -name \*.tkt`
 Boot.Client] - Reading
 [Client.Document] - Reading
 [Client.Element] - Reading
