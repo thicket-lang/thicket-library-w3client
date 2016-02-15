@@ -2,7 +2,7 @@
  * Thicket
  * https://github.com/d-plaindoux/thicket
  *
- * Copyright (c) 2015 Didier Plaindoux
+ * Copyright (c) 2015-2016 Didier Plaindoux
  * Licensed under the LGPL2 license.
  */
  
@@ -10,7 +10,7 @@ module Client.Event.Key
 
 from Data.String import string
 from Data.Number import number
-from Client.Document import dom
+from Client.Dom import dom
 
 type KeyEventType {
     KeyPress 
@@ -32,4 +32,4 @@ model Keys {
     CARRIAGE_RETURN : number
 }
 
-def standardKeys : Keys = { Keys 13 }
+def keys : Keys = { Keys 13 }

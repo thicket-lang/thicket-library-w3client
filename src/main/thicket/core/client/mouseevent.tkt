@@ -2,14 +2,14 @@
  * Thicket
  * https://github.com/d-plaindoux/thicket
  *
- * Copyright (c) 2015 Didier Plaindoux
+ * Copyright (c) 2015-2016 Didier Plaindoux
  * Licensed under the LGPL2 license.
  */
  
 module Client.Event.Mouse
 
 from Data.String import string
-from Client.Document import dom
+from Client.Dom import dom
 
 type MouseEventType {
     MouseOver 

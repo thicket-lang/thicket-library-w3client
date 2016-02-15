@@ -11,6 +11,7 @@
     ],
     "modules": [
         "Boot.Client",
+        "Client.Dom",
         "Client.Document",
         "Client.Document.Renderer",
         "Client.Event",
@@ -19,7 +20,7 @@
     ],
     "native": { 
         "javascript": [
-            "dom.js"
+            "document.js"
         ]
     },
     "requires":[

@@ -1,0 +1,54 @@
+/*
+ * Thicket
+ * https://github.com/d-plaindoux/thicket
+ *
+ * Copyright (c) 2015-2016 Didier Plaindoux
+ * Licensed under the LGPL2 license.
+ */
+
+module Client.Dom
+
+from Client.Event.Mouse import MouseEventType
+from Client.Event.Key import KeyEventType
+
+from Data.String import string
+from Data.Number import number,number2string
+from Data.Option import option,some,none
+from Data.List import list,List
+from Data.Boolean import bool
+
+trait dom {
+    addChild : dom -> dom
+    addChilds : list[dom] -> dom
+    removeChilds : dom
+    
+    addEmptyAttribute : string -> dom
+    addOptionalAttribute : string -> option[string] -> dom
+    addAttribute : string -> string -> dom
+    findAttribute : string -> option[string]
+    removeAttribute : string -> dom
+    
+    onCondition : bool -> (dom -> dom) -> dom
+    
+    onMouseEvent : [a] MouseEventType -> (dom -> a) -> dom
+    onKeyEvent : [a] KeyEventType -> (dom -> number -> a) -> dom
+
+    find : string -> option[dom]
+
+    clone : dom
+    remove : dom
+    replaceWith : dom -> dom
+    
+    value : option[string]
+    
+    map : [a] (dom -> a) -> a
+} {
+    def addEmptyAttribute n = self addAttribute n ""
+    def addOptionalAttribute name value = value fold self $ self addAttribute name
+    
+    def addChilds l = l foldL dom::addChild self
+
+    def onCondition condition action = condition fold (action self) self
+
+    def map f = f self
+}
