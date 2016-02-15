@@ -59,13 +59,13 @@ def adapter string2dom : string -> dom = s -> {
 }
 
 def adapter string2domlist : string -> list[dom] = s -> {
-    List[(documentElement $ internal "string.toDom" s)]
+    List[(string2dom s)]
 }
 
 def adapter number2dom : number -> dom = s -> {
-    documentElement $ internal "string.toDom" (number2string s)
+    string2dom $ number2string s
 }
 
 def adapter number2domlist : number -> list[dom] = s -> {
-    List[(documentElement $ internal "string.toDom" $ number2string s)]
+    List[(number2dom s)]
 }
