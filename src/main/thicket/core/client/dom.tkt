@@ -40,8 +40,6 @@ trait dom {
     replaceWith : dom -> dom
     
     value : option[string]
-    
-    map : [a] (dom -> a) -> a
 } {
     def addEmptyAttribute n = self addAttribute n ""
     def addOptionalAttribute name value = value fold self $ self addAttribute name
@@ -49,6 +47,4 @@ trait dom {
     def addChilds l = l foldL dom::addChild self
 
     def onCondition condition action = condition fold (action self) self
-
-    def map f = f self
 }
