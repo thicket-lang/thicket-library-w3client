@@ -30,6 +30,9 @@ class keyEventType this:KeyEventType {
 
 model Keys {
     CARRIAGE_RETURN : number
+    LINE_FEED       : number
+    FORM_FEED       : number
+    TABULAR         : number    
 }
 
-def keys : Keys = { Keys 13 }
+def keys : Keys = { Keys 13 10 12 9 }
