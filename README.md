@@ -2,24 +2,18 @@
 
 A W3 client library dedicated to the Thicket language.
 
-## Modules compilation
+## Project construction
 
-```sh
-> thicket compile -i <..>/thicket-library-core/bin -p Core -o obj -v `find src/main/thicket -name \*.tkt`
-[Boot.Client] - Reading
-[Client.Document] - Reading
-[Client.Element] - Reading
-...
-```
+The following command  build, test and intall the package in the
+user local repository i.e. `~/.thicket/site` directory on unix
+based system.
 
-## Package construction
+```sh 
+> ls
+LICENSE         bin         package-test.pkt    src
+README.md       obj         package.pkt
 
-```sh
-> thicket package -i obj/ -o bin/ -i src/main/js/ -v -s -n w3client.pkt 
-[Core] - Reading definition
-[Boot.Core] - Module objcode added
-[Data] - Module objcode added
-[Data.Native] - Module objcode added
+> $THICKET_HOME/bin/thicket project install
 ...
 ```
 
